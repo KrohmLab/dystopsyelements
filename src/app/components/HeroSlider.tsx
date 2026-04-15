@@ -6,7 +6,7 @@ import { ChevronRight, ChevronLeft, Calendar } from "lucide-react";
 const SLIDES = [
   {
     id: 1,
-    title: "NEXEN FESTIVAL 2026",
+    title: "NEXEN FESTIVAL",
     subtitle: "Édition 2026",
     date: "15 - 18 Août 2026",
     location: "Forêt de Brocéliande",
