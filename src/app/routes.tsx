@@ -11,5 +11,5 @@ export const router = createBrowserRouter([
     ],
   },
 ], {
-  basename: "/Dystopsyelements" //
+  basename: "import.meta.env.BASE_URL" //
 });
