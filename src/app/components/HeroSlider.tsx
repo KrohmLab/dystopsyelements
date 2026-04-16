@@ -76,11 +76,12 @@ export function HeroSlider() {
         </motion.div>
       </AnimatePresence>
 
-      {/* LA SOLUTION : 
-          On reste sur "items-center" (centré) jusqu'au breakpoint "xl:" (Grand écran de PC).
-          Le rendu iPad sera donc le même que le rendu mobile (parfait, au centre).
+      {/* 
+          px-12 sur mobile (forces le retour à la ligne)
+          sm:px-24 sur les petits écrans/tablettes
+          xl:px-16 retour à l'alignement classique sur grand PC
       */}
-      <div className="relative z-20 w-full max-w-7xl mx-auto px-6 sm:px-12 xl:px-16 flex flex-col items-center xl:items-start pt-12 xl:pt-0">
+      <div className="relative z-20 w-full max-w-7xl mx-auto px-12 sm:px-24 md:px-32 xl:px-16 flex flex-col items-center xl:items-start pt-12 xl:pt-0">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentSlide}
@@ -95,7 +96,6 @@ export function HeroSlider() {
               <span className="text-[#fc029b] font-orbitron text-[10px] md:text-xs font-bold uppercase tracking-widest">{SLIDES[currentSlide].subtitle}</span>
             </div>
 
-            {/* text-center partout, sauf sur PC (xl:text-left) */}
             <h1 
               className="font-orbitron text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-black text-white mb-4 xl:mb-6 leading-[1.1] xl:leading-tight glitch-effect tracking-tighter uppercase break-words text-center xl:text-left"
               data-text={SLIDES[currentSlide].title}
@@ -103,7 +103,6 @@ export function HeroSlider() {
               {SLIDES[currentSlide].title}
             </h1>
             
-            {/* justifié au centre partout, sauf sur PC (xl:justify-start) */}
             <div className="flex flex-col sm:flex-row items-center justify-center xl:justify-start space-y-3 sm:space-y-0 sm:space-x-6 mb-8 xl:mb-10 w-full">
               <div className="flex items-center space-x-3">
                 <div className="p-1.5 xl:p-2 border border-[#75feed]/30 rounded-sm bg-[#75feed]/10">
@@ -142,7 +141,6 @@ export function HeroSlider() {
         </AnimatePresence>
       </div>
 
-      {/* Les boutons fléchés restent cachés sur iPad, n'apparaissent que sur grand écran (xl:flex) */}
       <div className="absolute bottom-10 right-10 z-20 hidden xl:flex space-x-4">
         <button 
           onClick={handlePrev}
