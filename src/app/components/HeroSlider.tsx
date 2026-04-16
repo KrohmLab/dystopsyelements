@@ -32,7 +32,7 @@ const SLIDES = [
 
 export function HeroSlider() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [direction, setDirection] = useState(1); // 1 = right, -1 = left
+  const [direction, setDirection] = useState(1);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -53,7 +53,7 @@ export function HeroSlider() {
   };
 
   return (
-    <section className="relative w-full h-screen bg-[#050505] overflow-hidden flex items-center justify-center">
+    <section className="relative w-full h-[100dvh] bg-[#050505] overflow-hidden flex items-center justify-center">
       <CyberFrame />
       
       {/* Slider Content */}
@@ -72,11 +72,15 @@ export function HeroSlider() {
             alt={SLIDES[currentSlide].title} 
             className="w-full h-full object-cover opacity-40 mix-blend-luminosity"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#020202] via-transparent to-[#020202]/50" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#020202] via-[#020202]/40 to-[#020202]/80" />
         </motion.div>
       </AnimatePresence>
 
-      <div className="relative z-20 w-full max-w-7xl mx-auto px-8 md:px-16 flex flex-col items-start pt-20">
+      {/* LA SOLUTION : 
+          On reste sur "items-center" (centré) jusqu'au breakpoint "xl:" (Grand écran de PC).
+          Le rendu iPad sera donc le même que le rendu mobile (parfait, au centre).
+      */}
+      <div className="relative z-20 w-full max-w-7xl mx-auto px-6 sm:px-12 xl:px-16 flex flex-col items-center xl:items-start pt-12 xl:pt-0">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentSlide}
@@ -84,37 +88,40 @@ export function HeroSlider() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -30 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="max-w-3xl"
+            className="max-w-3xl w-full flex flex-col items-center xl:items-start"
           >
-            <div className="inline-flex items-center space-x-2 px-3 py-1 bg-[#fc029b]/10 border border-[#fc029b]/50 rounded-sm mb-4">
+            <div className="inline-flex items-center space-x-2 px-3 py-1 bg-[#fc029b]/10 border border-[#fc029b]/50 rounded-sm mb-3 xl:mb-4">
               <span className="w-2 h-2 rounded-full bg-[#fc029b] animate-pulse" />
-              <span className="text-[#fc029b] font-orbitron text-xs font-bold uppercase tracking-widest">{SLIDES[currentSlide].subtitle}</span>
+              <span className="text-[#fc029b] font-orbitron text-[10px] md:text-xs font-bold uppercase tracking-widest">{SLIDES[currentSlide].subtitle}</span>
             </div>
+
+            {/* text-center partout, sauf sur PC (xl:text-left) */}
             <h1 
-              className="font-orbitron text-5xl md:text-7xl font-black text-white mb-6 leading-tight glitch-effect tracking-tighter uppercase"
+              className="font-orbitron text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-black text-white mb-4 xl:mb-6 leading-[1.1] xl:leading-tight glitch-effect tracking-tighter uppercase break-words text-center xl:text-left"
               data-text={SLIDES[currentSlide].title}
             >
               {SLIDES[currentSlide].title}
             </h1>
             
-            <div className="flex flex-col sm:flex-row sm:items-center space-y-4 sm:space-y-0 sm:space-x-8 mb-10">
+            {/* justifié au centre partout, sauf sur PC (xl:justify-start) */}
+            <div className="flex flex-col sm:flex-row items-center justify-center xl:justify-start space-y-3 sm:space-y-0 sm:space-x-6 mb-8 xl:mb-10 w-full">
               <div className="flex items-center space-x-3">
-                <div className="p-2 border border-[#75feed]/30 rounded-sm bg-[#75feed]/10">
-                  <Calendar className="w-5 h-5 text-[#75feed]" />
+                <div className="p-1.5 xl:p-2 border border-[#75feed]/30 rounded-sm bg-[#75feed]/10">
+                  <Calendar className="w-4 h-4 xl:w-5 xl:h-5 text-[#75feed]" />
                 </div>
-                <span className="font-rajdhani text-xl text-gray-300 font-medium tracking-wide">
+                <span className="font-rajdhani text-lg xl:text-xl text-gray-300 font-medium tracking-wide">
                   {SLIDES[currentSlide].date}
                 </span>
               </div>
               <div className="flex items-center space-x-3 text-gray-300">
-                <span className="font-orbitron text-[#75feed] text-lg">&gt;</span>
-                <span className="font-rajdhani text-xl font-medium tracking-wide uppercase">
+                <span className="font-orbitron text-[#75feed] text-base xl:text-lg hidden sm:inline">&gt;</span>
+                <span className="font-rajdhani text-lg xl:text-xl font-medium tracking-wide uppercase text-center">
                   {SLIDES[currentSlide].location}
                 </span>
               </div>
             </div>
 
-            <button className="relative group px-8 py-4 bg-transparent overflow-hidden">
+            <button className="relative group px-6 py-3 xl:px-8 xl:py-4 bg-transparent overflow-hidden">
               <>
                 <div className="absolute inset-0 bg-[#75feed] opacity-10 group-hover:opacity-20 transition-opacity duration-300" />
                 <div 
@@ -126,17 +133,17 @@ export function HeroSlider() {
               </>
               <div className="absolute top-0 left-0 w-2 h-2 border-t-2 border-l-2 border-[#75feed]" />
               <div className="absolute bottom-0 right-0 w-2 h-2 border-b-2 border-r-2 border-[#75feed]" />
-              <span className="relative font-orbitron font-bold text-white tracking-widest uppercase flex items-center space-x-3 text-glow-cyan">
+              <span className="relative font-orbitron font-bold text-sm xl:text-base text-white tracking-widest uppercase flex items-center space-x-2 xl:space-x-3 text-glow-cyan">
                 <span>Billetterie</span>
-                <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                <ChevronRight className="w-4 h-4 xl:w-5 xl:h-5 group-hover:translate-x-1 transition-transform" />
               </span>
             </button>
           </motion.div>
         </AnimatePresence>
       </div>
 
-      {/* Controls */}
-      <div className="absolute bottom-10 right-10 z-20 flex space-x-4">
+      {/* Les boutons fléchés restent cachés sur iPad, n'apparaissent que sur grand écran (xl:flex) */}
+      <div className="absolute bottom-10 right-10 z-20 hidden xl:flex space-x-4">
         <button 
           onClick={handlePrev}
           className="p-3 border border-gray-700 bg-[#050505]/50 hover:border-[#75feed] hover:text-[#75feed] text-gray-400 transition-all backdrop-blur-md"
@@ -151,7 +158,6 @@ export function HeroSlider() {
         </button>
       </div>
 
-      {/* Glitch Overlay Effect */}
       <div className="absolute inset-0 pointer-events-none z-10 opacity-10 mix-blend-overlay">
         <div className="w-full h-full bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,#fff_2px,#fff_4px)] opacity-20" />
       </div>

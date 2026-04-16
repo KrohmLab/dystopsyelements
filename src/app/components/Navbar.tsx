@@ -49,8 +49,8 @@ export function Navbar() {
     <nav 
       className={`fixed top-0 w-full z-50 transition-all duration-500 ${
         isScrolled 
-          ? "bg-[#020202]/80 backdrop-blur-xl border-b border-[#75feed]/30 shadow-[0_4px_30px_rgba(117,254,237,0.1)] py-2" 
-          : "bg-transparent border-b-0 py-6"
+          ? "bg-[#020202]/80 backdrop-blur-xl border-b border-[#75feed]/30 shadow-[0_4px_30px_rgba(117,254,237,0.1)] py-1" 
+          : "bg-transparent border-b-0 py-2"
       }`}
     >
       {/* Glitch Overlay on Scroll State Change */}
@@ -72,9 +72,11 @@ export function Navbar() {
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        {/* Hauteur réduite ici : h-12 au lieu de h-16 */}
+        <div className="flex justify-between items-center h-14">
           
           <div className="flex-shrink-0 flex items-center">
+            {/* Logo réduit ici : w-10 h-10 au lieu de w-12 h-12 */}
             <Link 
               to="/" 
               className="group relative w-12 h-12 flex items-center justify-center transition-all duration-300"
@@ -115,7 +117,7 @@ export function Navbar() {
             <div className="ml-8 pl-8 border-l border-gray-800">
               <Link 
                 to="/" 
-                className="relative inline-flex items-center justify-center px-6 py-2.5 font-orbitron text-xs font-bold uppercase tracking-widest text-white group overflow-hidden"
+                className="relative inline-flex items-center justify-center px-6 py-2 font-orbitron text-xs font-bold uppercase tracking-widest text-white group overflow-hidden"
                 style={{ clipPath: 'polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px)' }}
               >
                 <span className="absolute inset-0 w-full h-full bg-[#fc029b] group-hover:bg-[#75feed] transition-colors duration-300" />
@@ -133,7 +135,7 @@ export function Navbar() {
 
           <div className="md:hidden flex items-center">
             <button onClick={() => setIsOpen(!isOpen)} className="text-gray-300 hover:text-[#75feed] focus:outline-none transition-colors">
-              {isOpen ? <X className="h-7 w-7" /> : <Menu className="h-7 w-7" />}
+              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
           </div>
         </div>
