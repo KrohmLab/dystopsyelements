@@ -50,7 +50,7 @@ export function CustomCursor() {
     };
   }, [position.x, position.y, isVisible]);
 
-  if (typeof window === 'undefined') return null;
+  if (typeof window === 'undefined' || !IS_CURSOR_ENABLED) return null;
 
   return (
     <>

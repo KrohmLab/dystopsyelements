@@ -115,8 +115,11 @@ function Group() {
 
 export function CyberFrame() {
   return (
-    <div className="absolute inset-0 z-10 pointer-events-none p-4 md:p-8" data-name="Frame">
-      <div className="relative w-full h-full flex items-center justify-center">
+    // pt-16 sur mobile pour pousser le cadre sous la navbar.
+    // pb-4 et px-4 pour gérer les bords du bas et des côtés.
+    // md:p-8 pour revenir à la version grand écran de base.
+    <div className="absolute inset-0 z-10 pointer-events-none pt-16 pb-4 px-4 md:p-8" data-name="Frame">
+      <div className="relative w-full h-full flex items-center justify-center opacity-40 sm:opacity-70 md:opacity-100 transition-opacity">
         <div className="-rotate-180 -scale-x-100 flex-none h-[100%] w-[100%]">
           <Group />
         </div>
