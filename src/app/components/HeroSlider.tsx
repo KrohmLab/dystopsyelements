@@ -78,7 +78,7 @@ export function HeroSlider() {
       </div>
 
       {/* 2. ZONE DE CONFINEMENT (Max 1920x1080)
-          Centrée horizontalement et verticalement sur les écrans géants.
+          Centrée horizontalement et verticalement sur les écrans géants
       */}
       <div className="relative z-10 w-full h-full max-w-[1920px] max-h-[1080px] flex items-center justify-center">
         
