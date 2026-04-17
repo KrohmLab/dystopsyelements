@@ -144,7 +144,7 @@ export function HeroSlider() {
           </AnimatePresence>
         </div>
 
-        {/* Boutons de navigation (maintenant relatifs à la zone 1920x1080) */}
+        {/* Updated navigation buttons for the 1920x1080 confinement zone */}
         <div className="absolute bottom-10 right-10 z-20 hidden xl:flex space-x-4">
           <button 
             onClick={handlePrev}
