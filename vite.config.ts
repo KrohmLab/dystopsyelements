@@ -27,6 +27,7 @@ export default defineConfig({
   resolve: {
     alias: {
       // Alias @ to the src directory
+      // Used by default in the project
       '@': path.resolve(__dirname, './src'),
     },
   },

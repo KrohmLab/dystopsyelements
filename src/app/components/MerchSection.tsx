@@ -46,7 +46,7 @@ export function MerchSection() {
             </h2>
           </div>
           
-          {/* NOUVEAU BOUTON : Style synchronisé avec NexenSection mais en version Cyan */}
+          {/* New Cyberpunk styled button */}
           <motion.button 
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
