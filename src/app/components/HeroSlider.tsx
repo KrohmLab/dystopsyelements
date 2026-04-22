@@ -72,7 +72,11 @@ export function HeroSlider() {
         
         <CyberFrame />
         
-        <div className="relative z-20 w-full max-w-7xl mx-auto px-12 sm:px-24 md:px-32 xl:px-16 flex flex-col items-center xl:items-start pt-12 xl:pt-0">
+        {/* ZONE DE CONFINEMENT SÉCURISÉE ET DÉCALÉE À DROITE
+            On utilise pl (padding-left) plus grand que pr (padding-right) 
+            sur les écrans larges (lg et xl) pour pousser le texte.
+        */}
+        <div className="absolute inset-0 z-20 flex flex-col justify-center items-center xl:items-start px-8 sm:px-16 md:px-[10%] lg:pl-[16%] lg:pr-[10%] xl:pl-[18%] xl:pr-[10%]">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentSlide}
@@ -82,7 +86,7 @@ export function HeroSlider() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="max-w-3xl w-full flex flex-col items-center xl:items-start"
             >
-              {/* SOUS-TITRE PERSONNALISÉ (Appel du nouvel attribut) */}
+              {/* SOUS-TITRE PERSONNALISÉ */}
               <div className="inline-flex items-center space-x-2 px-3 py-1 bg-[#fc029b]/10 border border-[#fc029b]/50 rounded-sm mb-3 xl:mb-4">
                 <span className="w-2 h-2 rounded-full bg-[#fc029b] animate-pulse" />
                 <span className="text-[#fc029b] font-orbitron text-[10px] md:text-xs font-bold uppercase tracking-widest">
@@ -136,7 +140,7 @@ export function HeroSlider() {
         </div>
 
         {/* Boutons de navigation */}
-        <div className="absolute bottom-10 right-10 z-20 hidden xl:flex space-x-4">
+        <div className="absolute bottom-[10%] right-[10%] z-20 hidden xl:flex space-x-4">
           <button 
             onClick={handlePrev}
             className="p-3 border border-gray-700 bg-[#050505]/50 hover:border-[#75feed] hover:text-[#75feed] text-gray-400 transition-all backdrop-blur-md pointer-events-auto"
