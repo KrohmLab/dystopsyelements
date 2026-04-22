@@ -110,13 +110,14 @@ export function Navbar() {
           <div className="hidden md:flex space-x-4 items-center">
             <NavLink to="/" dataText="Accueil">Accueil</NavLink>
             <NavLink to="/" dataText="Nexen Festival 2026">Nexen Festival 2026</NavLink>
+            <NavLink to="/events" dataText="Agenda">Agenda</NavLink>
             <NavLink to="/" dataText="Prestations">Prestations</NavLink>
             <NavLink to="/" dataText="Shop">Shop</NavLink>
             <NavLink to="/" dataText="Contact">Contact</NavLink>
             
             <div className="ml-8 pl-8 border-l border-gray-800">
               <Link 
-                to="/" 
+                to="/events" 
                 className="relative inline-flex items-center justify-center px-6 py-2 font-orbitron text-xs font-bold uppercase tracking-widest text-white group overflow-hidden"
                 style={{ clipPath: 'polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px)' }}
               >
@@ -160,9 +161,9 @@ export function Navbar() {
                 </Link>
               ))}
               <div className="pt-4 mt-4 border-t border-gray-800">
-                <Link to="/" className="flex items-center space-x-3 px-4 py-3 text-lg font-orbitron uppercase text-[#fc029b] hover:bg-[#fc029b]/10 transition-all border border-[#fc029b]/30">
+                <Link to="/events" className="flex items-center space-x-3 px-4 py-3 text-lg font-orbitron uppercase text-[#fc029b] hover:bg-[#fc029b]/10 transition-all border border-[#fc029b]/30">
                   <Terminal className="w-5 h-5" />
-                  <span>Billeterie</span>
+                  <span>Billetterie</span>
                 </Link>
               </div>
             </div>
