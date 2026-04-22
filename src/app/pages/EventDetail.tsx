@@ -13,7 +13,7 @@ export function EventDetail() {
   
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
 
-  // Configuration de la barre de scroll (Style Home.tsx)
+  // Barre de scroll style Home.tsx
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -57,7 +57,11 @@ export function EventDetail() {
         style={{ scaleX }}
       />
 
-      <Link to="/events" className="fixed top-24 left-4 sm:left-8 z-40 group flex items-center space-x-2 text-gray-400 hover:text-[#75feed] transition-colors bg-[#050505]/80 backdrop-blur-md px-4 py-2 border border-gray-800 hover:border-[#75feed]/50">
+      {/* BOUTON RETOUR : Centré sur mobile, à gauche sur desktop */}
+      <Link 
+        to="/events" 
+        className="fixed top-24 left-1/2 -translate-x-1/2 sm:left-8 sm:translate-x-0 z-40 group flex items-center space-x-2 text-gray-400 hover:text-[#75feed] transition-colors bg-[#050505]/80 backdrop-blur-md px-4 py-2 border border-gray-800 hover:border-[#75feed]/50 whitespace-nowrap"
+      >
         <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
         <span className="font-orbitron text-sm uppercase tracking-widest">Retour</span>
       </Link>
@@ -89,7 +93,7 @@ export function EventDetail() {
               </span>
             </div>
             
-            <h1 className="font-orbitron font-black text-transparent bg-clip-text bg-gradient-to-br from-white via-white to-gray-500 uppercase tracking-tighter mb-6 leading-none text-[clamp(2.5rem,8vw,6rem)] text-balance">
+            <h1 className="font-orbitron font-black text-transparent bg-clip-text bg-gradient-to-br from-white via-white to-gray-500 uppercase tracking-tighter mb-6 leading-none break-words text-[clamp(2.5rem,8vw,6rem)] text-balance">
               {event.title}
             </h1>
             
@@ -148,6 +152,7 @@ export function EventDetail() {
 
       <CyberSeparator variant={3} color="cyan" direction="left" />
 
+      {/* SECTION : DESCRIPTION DÉTAILLÉE */}
       <section className="pt-24 pb-12 relative z-10 bg-[#020202]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <motion.div 
@@ -198,6 +203,7 @@ export function EventDetail() {
         </div>
       </section>
 
+      {/* LINE-UP SECTION */}
       <section className="py-12 relative z-10 bg-[#020202]">
         <FloatingPattern variant={2} color="pink" className="w-[400px] h-[400px] right-0 top-[10%] opacity-5" delay={1} />
         
@@ -210,14 +216,14 @@ export function EventDetail() {
             
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
               {event.artists.map((artist, idx) => (
-                <motion.button
+                <motion.button 
                   key={artist.id}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: idx * 0.1, duration: 0.5 }}
                   onClick={() => setSelectedArtist(artist)}
-                  className="group cursor-pointer flex flex-col relative"
+                  className="group cursor-pointer flex flex-col items-center relative w-full text-center focus:outline-none" 
                 >
                   <div className="relative aspect-[3/4] mb-4 w-full shrink-0">
                     <div className={`absolute -inset-2 border border-gray-800/50 ${artist.type === 'Live' ? 'group-hover:border-[#fc029b]/40' : 'group-hover:border-[#75feed]/40'} bg-transparent transition-colors duration-500`} />
@@ -239,11 +245,13 @@ export function EventDetail() {
                     </div>
                   </div>
                   
-                  <div className="px-1 mt-2">
+                  {/* BLOC TEXTE CENTRÉ */}
+                  <div className="px-1 mt-2 flex flex-col items-center">
                     <h3 className="font-orbitron text-2xl font-black text-white group-hover:text-[#fc029b] transition-colors uppercase tracking-tight mb-1">
                       {artist.name}
                     </h3>
-                    <p className="font-rajdhani text-gray-400 text-sm uppercase tracking-widest flex items-center space-x-2">
+                    {/* STYLE AVEC ICÔNE CENTRÉ (justify-center) */}
+                    <p className="font-rajdhani text-gray-400 text-sm uppercase tracking-widest flex items-center justify-center space-x-2">
                       <Music className="w-3 h-3 text-[#75feed]" />
                       <span>{artist.style}</span>
                     </p>
@@ -255,6 +263,7 @@ export function EventDetail() {
         </div>
       </section>
 
+      {/* MODALE ARTISTE */}
       <AnimatePresence>
         {selectedArtist && (
           <motion.div 
@@ -306,6 +315,7 @@ export function EventDetail() {
               <div className="w-full md:w-3/5 p-6 sm:p-8 md:p-12 relative flex flex-col overflow-y-auto">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-[#75feed]/5 blur-[100px] pointer-events-none" />
                 
+                {/* On a retiré les classes de centrage ici pour revenir à l'alignement à gauche natif */}
                 <div className="mb-6 relative z-10">
                   <div className="flex items-center space-x-4 mb-4">
                     <span className={`font-orbitron text-xs font-bold uppercase tracking-widest px-3 py-1 bg-[#050505] border border-gray-800 ${selectedArtist.type === 'Live' ? 'text-[#fc029b] border-[#fc029b]/30' : 'text-[#75feed] border-[#75feed]/30'}`}>
