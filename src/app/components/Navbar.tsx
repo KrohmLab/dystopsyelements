@@ -45,6 +45,16 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isScrolled]);
 
+  // Liste des liens pour le menu mobile avec leurs chemins respectifs
+  const mobileLinks = [
+    { name: 'Accueil', to: '/' },
+    { name: 'Nexen Festival 2026', to: '/' },
+    { name: 'Agenda', to: '/events' }, // <-- Ajout de la page Agenda ici
+    { name: 'Prestations', to: '/' },
+    { name: 'Shop', to: '/' },
+    { name: 'Contact', to: '/' }
+  ];
+
   return (
     <nav 
       className={`fixed top-0 w-full z-50 transition-all duration-500 ${
@@ -72,11 +82,9 @@ export function Navbar() {
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Hauteur réduite ici : h-12 au lieu de h-16 */}
         <div className="flex justify-between items-center h-14">
           
           <div className="flex-shrink-0 flex items-center">
-            {/* Logo réduit ici : w-10 h-10 au lieu de w-12 h-12 */}
             <Link 
               to="/" 
               className="group relative w-12 h-12 flex items-center justify-center transition-all duration-300"
@@ -110,13 +118,14 @@ export function Navbar() {
           <div className="hidden md:flex space-x-4 items-center">
             <NavLink to="/" dataText="Accueil">Accueil</NavLink>
             <NavLink to="/" dataText="Nexen Festival 2026">Nexen Festival 2026</NavLink>
+            <NavLink to="/events" dataText="Agenda">Agenda</NavLink>
             <NavLink to="/" dataText="Prestations">Prestations</NavLink>
             <NavLink to="/" dataText="Shop">Shop</NavLink>
             <NavLink to="/" dataText="Contact">Contact</NavLink>
             
             <div className="ml-8 pl-8 border-l border-gray-800">
               <Link 
-                to="/" 
+                to="/events" 
                 className="relative inline-flex items-center justify-center px-6 py-2 font-orbitron text-xs font-bold uppercase tracking-widest text-white group overflow-hidden"
                 style={{ clipPath: 'polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px)' }}
               >
@@ -150,19 +159,24 @@ export function Navbar() {
             className="md:hidden bg-[#050505]/95 backdrop-blur-xl border-b border-[#75feed]/30 overflow-hidden"
           >
             <div className="px-4 pt-4 pb-6 space-y-2">
-              {['Accueil', 'Nexen Festival 2026', 'Prestations', 'Shop', 'Contact'].map((item) => (
+              {mobileLinks.map((item) => (
                 <Link 
-                  key={item}
-                  to="/" 
+                  key={item.name}
+                  to={item.to} 
+                  onClick={() => setIsOpen(false)} // Referme le menu au clic
                   className="block px-4 py-3 text-lg font-orbitron uppercase text-gray-300 hover:text-[#75feed] hover:bg-[#75feed]/10 hover:pl-6 transition-all duration-300 border-l-2 border-transparent hover:border-[#75feed]"
                 >
-                  {item}
+                  {item.name}
                 </Link>
               ))}
               <div className="pt-4 mt-4 border-t border-gray-800">
-                <Link to="/" className="flex items-center space-x-3 px-4 py-3 text-lg font-orbitron uppercase text-[#fc029b] hover:bg-[#fc029b]/10 transition-all border border-[#fc029b]/30">
+                <Link 
+                  to="/events" 
+                  onClick={() => setIsOpen(false)} // Referme le menu au clic
+                  className="flex items-center space-x-3 px-4 py-3 text-lg font-orbitron uppercase text-[#fc029b] hover:bg-[#fc029b]/10 transition-all border border-[#fc029b]/30"
+                >
                   <Terminal className="w-5 h-5" />
-                  <span>Billeterie</span>
+                  <span>Billetterie</span>
                 </Link>
               </div>
             </div>
