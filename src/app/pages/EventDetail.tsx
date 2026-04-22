@@ -89,7 +89,7 @@ export function EventDetail() {
               </span>
             </div>
             
-            <h1 className="font-orbitron text-5xl md:text-7xl lg:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-br from-white via-white to-gray-500 uppercase tracking-tighter mb-6 leading-none break-words">
+            <h1 className="font-orbitron font-black text-transparent bg-clip-text bg-gradient-to-br from-white via-white to-gray-500 uppercase tracking-tighter mb-6 leading-none text-[clamp(2.5rem,8vw,6rem)] text-balance">
               {event.title}
             </h1>
             

@@ -62,7 +62,7 @@ export function Events() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="font-orbitron text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#75feed] to-[#fc029b] uppercase tracking-widest mb-4 break-words">
+            <h1 className="font-orbitron font-black text-transparent bg-clip-text bg-gradient-to-r from-[#75feed] to-[#fc029b] uppercase tracking-widest mb-4 text-[clamp(2.5rem,10vw,5rem)] text-balance leading-tight">
               Billetterie
             </h1>
             <p className="font-rajdhani text-xl text-gray-300 max-w-2xl mx-auto box-glow-cyan-text">
