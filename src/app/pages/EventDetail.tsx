@@ -210,7 +210,7 @@ export function EventDetail() {
             
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
               {event.artists.map((artist, idx) => (
-                <motion.div
+                <motion.button
                   key={artist.id}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -248,7 +248,7 @@ export function EventDetail() {
                       <span>{artist.style}</span>
                     </p>
                   </div>
-                </motion.div>
+                </motion.button>
               ))}
             </div>
           </div>
