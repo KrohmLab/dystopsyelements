@@ -45,11 +45,10 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isScrolled]);
 
-  // Liste des liens pour le menu mobile avec leurs chemins respectifs
   const mobileLinks = [
     { name: 'Accueil', to: '/' },
     { name: 'Nexen Festival 2026', to: '/' },
-    { name: 'Agenda', to: '/events' }, // <-- Ajout de la page Agenda ici
+    { name: 'Agenda', to: '/events' },
     { name: 'Prestations', to: '/' },
     { name: 'Shop', to: '/' },
     { name: 'Contact', to: '/' }
@@ -59,8 +58,9 @@ export function Navbar() {
     <nav 
       className={`fixed top-0 w-full z-50 transition-all duration-500 ${
         isScrolled 
-          ? "bg-[#020202]/80 backdrop-blur-xl border-b border-[#75feed]/30 shadow-[0_4px_30px_rgba(117,254,237,0.1)] py-1" 
-          : "bg-transparent border-b-0 py-2"
+          ? "bg-[#020202]/80 backdrop-blur-xl border-b border-[#75feed]/30 shadow-[0_4px_30px_rgba(117,254,237,0.1)] py-2" 
+          /* MODIFICATION ICI : pt-6 md:pt-2 pour descendre le menu sur mobile quand on est en haut */
+          : "bg-transparent border-b-0 pt-6 pb-2 md:pt-2"
       }`}
     >
       {/* Glitch Overlay on Scroll State Change */}
@@ -81,7 +81,8 @@ export function Navbar() {
         className={`absolute inset-0 z-[-1] bg-[linear-gradient(rgba(117,254,237,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(117,254,237,0.05)_1px,transparent_1px)] bg-[size:20px_20px] transition-opacity duration-500 ${isScrolled ? "opacity-100" : "opacity-0"}`} 
       />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* MODIFICATION ICI : px-8 au lieu de px-4 pour éloigner des bords du cadre sur mobile */}
+      <div className="max-w-7xl mx-auto px-8 md:px-6 lg:px-8">
         <div className="flex justify-between items-center h-14">
           
           <div className="flex-shrink-0 flex items-center">
@@ -163,7 +164,7 @@ export function Navbar() {
                 <Link 
                   key={item.name}
                   to={item.to} 
-                  onClick={() => setIsOpen(false)} // Referme le menu au clic
+                  onClick={() => setIsOpen(false)}
                   className="block px-4 py-3 text-lg font-orbitron uppercase text-gray-300 hover:text-[#75feed] hover:bg-[#75feed]/10 hover:pl-6 transition-all duration-300 border-l-2 border-transparent hover:border-[#75feed]"
                 >
                   {item.name}
@@ -172,7 +173,7 @@ export function Navbar() {
               <div className="pt-4 mt-4 border-t border-gray-800">
                 <Link 
                   to="/events" 
-                  onClick={() => setIsOpen(false)} // Referme le menu au clic
+                  onClick={() => setIsOpen(false)}
                   className="flex items-center space-x-3 px-4 py-3 text-lg font-orbitron uppercase text-[#fc029b] hover:bg-[#fc029b]/10 transition-all border border-[#fc029b]/30"
                 >
                   <Terminal className="w-5 h-5" />

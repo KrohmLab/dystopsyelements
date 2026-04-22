@@ -1,4 +1,5 @@
 import svgPaths from "../../imports/svg-esp92axs1t";
+import HeaderHomeMobile from "../../imports/HeaderHomeMobile";
 
 function Group() {
   return (
@@ -115,15 +116,23 @@ function Group() {
 
 export function CyberFrame() {
   return (
-    // pt-16 sur mobile pour pousser le cadre sous la navbar.
-    // pb-4 et px-4 pour gérer les bords du bas et des côtés.
-    // md:p-8 pour revenir à la version grand écran de base.
-    <div className="absolute inset-0 z-10 pointer-events-none pt-16 pb-4 px-4 md:p-8" data-name="Frame">
-      <div className="relative w-full h-full flex items-center justify-center opacity-40 sm:opacity-70 md:opacity-100 transition-opacity">
-        <div className="-rotate-180 -scale-x-100 flex-none h-[100%] w-[100%]">
-          <Group />
+    <>
+      {/* CADRE MOBILE: Utilisation de "inset-3" (marge de 12px) pour laisser respirer le cadre
+          sans casser le positionnement du menu Navbar. */}
+      <div className="absolute inset-3 z-10 pointer-events-none md:hidden" data-name="Frame-Mobile">
+        <div className="relative w-full h-full opacity-80 flex text-[#75feed]">
+          <HeaderHomeMobile />
         </div>
       </div>
-    </div>
+
+      {/* CADRE PC/TABLETTE: Masqué sur mobile */}
+      <div className="absolute inset-0 z-10 pointer-events-none pt-16 pb-4 px-4 hidden md:flex md:p-8" data-name="Frame-Desktop">
+        <div className="relative w-full h-full flex items-center justify-center opacity-70 md:opacity-100 transition-opacity text-[#75feed]">
+          <div className="-rotate-180 -scale-x-100 flex-none h-[100%] w-[100%]">
+            <Group />
+          </div>
+        </div>
+      </div>
+    </>
   );
 }

@@ -95,7 +95,7 @@ export function HeroSlider() {
               </div>
 
               <h1 
-                className="font-orbitron text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-black text-white mb-4 xl:mb-6 leading-[1.1] xl:leading-tight glitch-effect tracking-tighter uppercase break-words text-center xl:text-left"
+                className="font-orbitron font-black text-white mb-4 xl:mb-6 leading-[1.1] xl:leading-tight glitch-effect tracking-tighter uppercase text-center xl:text-left text-[clamp(2rem,5vw,5.5rem)] text-balance"
                 data-text={currentEvent.title}
               >
                 {currentEvent.title}
