@@ -42,16 +42,36 @@ export function Events() {
         style={{ scaleX }}
       />
 
-      {/* Specific Hero for the pages */}
+      {/* Specific Hero for the pages - Version Intensitée Maximale */}
       <section className="relative w-full h-[60vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
+          
+          {/* Images animées (Glitch permanent Intense) */}
+          <div className="absolute inset-0 z-0 scale-105"> {/* Scale pour éviter les bords nets sur mobile */}
+            {/* Image de fond principale */}
+            <img 
+              src="https://images.unsplash.com/photo-1578300253266-dedd2cd40912?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920" 
+              alt="Events Background" 
+              className="absolute inset-0 w-full h-full object-cover mix-blend-luminosity filter hue-rotate-180 opacity-50"
+            />
+            {/* Calque Cyan animé Intense (Mode Screen 100% + flou) */}
+            <img 
+              src="https://images.unsplash.com/photo-1578300253266-dedd2cd40912?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920" 
+              alt="" 
+              className="absolute inset-0 w-full h-full object-cover mix-blend-screen filter hue-rotate-90 blur-sm animate-[hero-glitch-1_2s_infinite]"
+            />
+            {/* Calque Rose animé Intense (Mode Screen 100% + flou) */}
+            <img 
+              src="https://images.unsplash.com/photo-1578300253266-dedd2cd40912?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920" 
+              alt="" 
+              className="absolute inset-0 w-full h-full object-cover mix-blend-screen filter hue-rotate-[270deg] blur-sm animate-[hero-glitch-2_1.5s_infinite]"
+            />
+          </div>
+
+          {/* Overlays d'assombrissement et Grille */}
           <div className="absolute inset-0 bg-gradient-to-b from-[#020202] via-transparent to-[#020202] z-10" />
           <div className="absolute inset-0 bg-black/60 z-10" />
-          <img 
-            src="https://images.unsplash.com/photo-1578300253266-dedd2cd40912?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920" 
-            alt="Events Background" 
-            className="w-full h-full object-cover mix-blend-luminosity filter hue-rotate-180 opacity-40"
-          />
+          
           {/* Cyber grid */}
           <div className="absolute inset-0 z-10 bg-[linear-gradient(rgba(117,254,237,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(117,254,237,0.1)_1px,transparent_1px)] bg-[size:40px_40px] opacity-30" />
         </div>
@@ -197,10 +217,28 @@ export function Events() {
         </div>
       </section>
 
+      {/* Animations */}
       <style dangerouslySetInnerHTML={{__html: `
         @keyframes scan { 0% { transform: translateY(-100%); } 50% { transform: translateY(100%); } 100% { transform: translateY(-100%); } }
+        
         @keyframes glitch-anim-1 { 0% { clip-path: inset(20% 0 80% 0); transform: translate(-2px, 1px); } 20% { clip-path: inset(60% 0 10% 0); transform: translate(2px, -1px); } 40% { clip-path: inset(40% 0 50% 0); transform: translate(-2px, 2px); } 60% { clip-path: inset(80% 0 5% 0); transform: translate(2px, -2px); } 80% { clip-path: inset(10% 0 70% 0); transform: translate(-1px, 1px); } 100% { clip-path: inset(30% 0 50% 0); transform: translate(1px, -1px); } }
+        
         @keyframes glitch-anim-2 { 0% { clip-path: inset(10% 0 60% 0); transform: translate(2px, -1px); } 20% { clip-path: inset(80% 0 5% 0); transform: translate(-2px, 1px); } 40% { clip-path: inset(30% 0 40% 0); transform: translate(2px, -2px); } 60% { clip-path: inset(50% 0 30% 0); transform: translate(-2px, 2px); } 80% { clip-path: inset(5% 0 80% 0); transform: translate(1px, -1px); } 100% { clip-path: inset(70% 0 10% 0); transform: translate(-1px, 1px); } }
+
+        /* Nouvelles animations pour le Header - Intensité Maximale */
+        @keyframes hero-glitch-1 {
+          0%, 100% { transform: translate(-5px, 2px); opacity: 0.8; }
+          25% { transform: translate(5px, -3px); opacity: 1; }
+          50% { transform: translate(-3px, 5px); opacity: 0.7; }
+          75% { transform: translate(3px, -2px); opacity: 0.9; }
+        }
+        
+        @keyframes hero-glitch-2 {
+          0%, 100% { transform: translate(5px, -2px); opacity: 0.8; }
+          25% { transform: translate(-3px, 5px); opacity: 1; }
+          50% { transform: translate(5px, 3px); opacity: 0.7; }
+          75% { transform: translate(-5px, -5px); opacity: 0.9; }
+        }
       `}} />
     </div>
   );
