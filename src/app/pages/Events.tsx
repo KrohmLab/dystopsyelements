@@ -106,7 +106,6 @@ export function Events() {
                 transition={{ delay: index * 0.1, duration: 0.5 }}
                 className="group cursor-pointer flex flex-col h-full relative"
               >
-                {/* L'IMAGE EST MAINTENANT CLICQUABLE */}
                 <Link to={`/events/${event.id}`} className="relative block mb-6 w-full shrink-0 aspect-[4/3] bg-[#050505]">
                   
                   {/* Cyberpunk Angular Frame */}
@@ -164,7 +163,6 @@ export function Events() {
                 
                 {/* Event Info */}
                 <div className="flex flex-col flex-grow px-2">
-                  {/* LE TITRE EST MAINTENANT CLICQUABLE */}
                   <Link to={`/events/${event.id}`} className="block w-fit">
                     <h3 className={`font-orbitron text-2xl font-black mb-3 uppercase tracking-tight transition-colors ${activeTab === 'upcoming' ? 'text-white group-hover:text-[#75feed]' : 'text-gray-300 group-hover:text-white'}`}>
                       {event.title}
@@ -183,27 +181,47 @@ export function Events() {
                   </div>
 
                   <div className="mt-auto pt-4 flex flex-col space-y-3">
+                    {/* Bouton Billetterie avec fond dégradé restauré */}
                     {activeTab === 'upcoming' && (
-                      <a href={event.ticketLink} className="relative w-full group/btn overflow-hidden block">
-                        <div className="absolute inset-0 bg-gradient-to-r from-[#75feed] to-[#fc029b] opacity-20 group-hover/btn:opacity-40 transition-opacity" />
-                        <div className="relative border border-[#75feed]/50 px-4 py-3 flex items-center justify-center space-x-2 backdrop-blur-sm group-hover/btn:border-[#75feed] transition-colors" style={{ clipPath: 'polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px)' }}>
-                          <Ticket className="w-4 h-4 text-[#75feed] group-hover/btn:text-white transition-colors" />
-                          <span className="font-orbitron text-sm font-bold uppercase tracking-widest text-[#75feed] group-hover/btn:text-white transition-colors">
-                            Billetterie
-                          </span>
+                      <a href={event.ticketLink} className="group/btn block w-full">
+                        <div className="relative px-4 py-3 bg-[#050505]/60 backdrop-blur-md border border-[#75feed] overflow-hidden flex items-center justify-center">
+                          
+                          {/* Fond dégradé */}
+                          <div className="absolute inset-0 bg-gradient-to-r from-[#75feed] to-[#fc029b] opacity-20 group-hover/btn:opacity-30 transition-opacity duration-300" />
+
+                          {/* Animation des bords style NexenSection */}
+                          <span className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#75feed] to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000 ease-in-out" />
+                          <span className="absolute bottom-0 right-0 w-full h-[2px] bg-gradient-to-l from-transparent via-[#75feed] to-transparent translate-x-full group-hover/btn:-translate-x-full transition-transform duration-1000 ease-in-out" />
+                          
+                          {/* Remplissage de scan au hover */}
+                          <span className="absolute inset-0 bg-[#75feed]/20 translate-y-[100%] group-hover/btn:translate-y-0 transition-transform duration-300 ease-in-out" />
+
+                          <div className="relative z-10 flex items-center space-x-2 text-white font-orbitron font-bold tracking-[0.1em] uppercase text-sm">
+                            <Ticket className="w-4 h-4 text-[#75feed] group-hover/btn:animate-pulse" />
+                            <span className="group-hover/btn:text-glow-cyan transition-all">Billetterie</span>
+                          </div>
                         </div>
                       </a>
                     )}
                     
-                    <Link to={`/events/${event.id}`} className="relative w-full group/info block">
-                      <div className={`relative border ${activeTab === 'upcoming' ? 'border-gray-800 hover:border-white' : 'border-gray-800 hover:border-[#fc029b]'} px-4 py-3 flex items-center justify-center space-x-2 transition-colors`} style={{ clipPath: 'polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px)' }}>
-                        <span className="font-orbitron text-sm font-bold uppercase tracking-widest text-gray-400 group-hover/info:text-white transition-colors">
-                          Plus d'infos
-                        </span>
-                        <ArrowRight className={`w-4 h-4 text-gray-500 group-hover/info:translate-x-1 transition-all ${activeTab === 'upcoming' ? 'group-hover/info:text-white' : 'group-hover/info:text-[#fc029b]'}`} />
+                    {/* Bouton Plus d'infos */}
+                    <Link to={`/events/${event.id}`} className="group/info block w-full">
+                      <div className={`relative px-4 py-3 bg-[#050505]/60 backdrop-blur-md border ${activeTab === 'upcoming' ? 'border-[#75feed]' : 'border-[#fc029b]'} overflow-hidden flex items-center justify-center`}>
+                        
+                        <span className={`absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent ${activeTab === 'upcoming' ? 'via-[#75feed]' : 'via-[#fc029b]'} to-transparent -translate-x-full group-hover/info:translate-x-full transition-transform duration-1000 ease-in-out`} />
+                        <span className={`absolute bottom-0 right-0 w-full h-[2px] bg-gradient-to-l from-transparent ${activeTab === 'upcoming' ? 'via-[#75feed]' : 'via-[#fc029b]'} to-transparent translate-x-full group-hover/info:-translate-x-full transition-transform duration-1000 ease-in-out`} />
+                        <span className={`absolute inset-0 ${activeTab === 'upcoming' ? 'bg-[#75feed]/10' : 'bg-[#fc029b]/10'} translate-y-[100%] group-hover/info:translate-y-0 transition-transform duration-300 ease-in-out`} />
+
+                        <div className="relative z-10 flex items-center space-x-2 text-white font-orbitron font-bold tracking-[0.1em] uppercase text-sm">
+                          <span className={`transition-all ${activeTab === 'upcoming' ? 'group-hover/info:text-glow-cyan' : 'group-hover/info:text-glow-pink'}`}>
+                            Plus d'infos
+                          </span>
+                          <ArrowRight className={`w-4 h-4 ${activeTab === 'upcoming' ? 'text-[#75feed]' : 'text-[#fc029b]'} group-hover/info:translate-x-1 transition-transform`} />
+                        </div>
                       </div>
                     </Link>
                   </div>
+
                 </div>
               </motion.div>
             ))}
