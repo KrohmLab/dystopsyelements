@@ -14,6 +14,7 @@ export interface Event {
   title: string;
   heroSubtitle: string;
   date: string; // ISO date string YYYY-MM-DD
+  displayDate?: string;
   time: string;
   location: string;
   image: string;
@@ -24,22 +25,26 @@ export interface Event {
   artists: Artist[];
 }
 
+import nexen2026 from "../../imports/NXN26---Banner-FB.jpg";
+import nexenshome from "../../imports/NexensHome---Banner-FB.png";
+
 export const MOCK_EVENTS: Event[] = [
   {
     id: "nexen-festival-26",
-    title: "NEXEN FESTIVAL 2026",
-    heroSubtitle: "Édition Anniversaire",
-    date: "2026-08-15",
-    time: "22:00 - 08:00",
-    location: "Confinement Zone - Secteur 4",
-    image: "https://images.unsplash.com/photo-1578300253266-dedd2cd40912?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+    title: "NEXEN FESTIVAL",
+    heroSubtitle: "Édition 2026",
+    date: "2026-06-05",
+    displayDate: "Du 05 au 07 Juin 2026", // Ce que les humains vont lire !
+    time: "17:00",
+    location: "Maine et Loire",
+    image: nexen2026,
     
     // NOUVELLE RÉPARTITION DES TEXTES :
     shortDescription: "Le festival principal de Dystopsy Element. Une nuit entière de fréquences sombres, de lumières stroboscopiques et de réalités altérées.",
     longDescription: "Préparez-vous à une immersion totale dans notre univers dystopique avec des line-ups exclusifs, des installations d'art génératif et des performances cyberpunk.\n\nLa Confinement Zone du Secteur 4 a été spécialement déverrouillée pour cette édition. Le protocole de sécurité habituel est suspendu. Repoussez vos limites et rejoignez le réseau.",
     
-    ticketLink: "#",
-    facebookLink: "#",
+    ticketLink: "https://www.helloasso.com/associations/dystopsy-elements/evenements/nexen-festival-2026",
+    facebookLink: "https://www.facebook.com/events/1363260745173238",
     artists: [
       {
         id: "a1",
@@ -64,19 +69,19 @@ export const MOCK_EVENTS: Event[] = [
     ]
   },
   {
-    id: "underground-rave-v4",
-    title: "UNDERGROUND RAVE v4.0",
-    heroSubtitle: "Secret Location",
-    date: "2026-05-10",
-    time: "23:00 - 06:00",
-    location: "Basement 7 - The Grid",
-    image: "https://images.unsplash.com/photo-1616709062048-788acece6a51?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+    id: "nexens-home",
+    title: "NEXEN'S HOME",
+    heroSubtitle: "INDOOR PARTY",
+    date: "2026-05-07",
+    time: "21:00 - 01:00",
+    location: "La Maison Café Nantes",
+    image: nexenshome,
     
-    shortDescription: "Retour aux sources avec une rave illégale (autorisée) dans les profondeurs de The Grid.",
-    longDescription: "Capacité ultra-limitée, BPM élevés, aucune règle si ce n'est le respect du dancefloor.\n\nL'adresse exacte vous sera transmise sur un canal crypté 24h avant l'événement. Préparez-vous pour une nuit brute, sans artifices, dédiée à l'essence même de la Hard Techno.",
+    shortDescription: "Dans les profondeurs du refuge, les systèmes s’allument un à un. Les murs vibrent, les circuits se réveillent, et le noyau du bunker s’apprête à pulser toute la nuit.",
+    longDescription: "Dans un futur où la surface s’effrite, où les villes se fracturent et où la lumière se réfugie sous terre, un abri subsiste. Un refuge organique et mécanique, où les murs vibrent encore d’une énergie indomptable. Un lieu où l’on se retrouve, où l’on respire, où l’on danse.\n\nPour cette édition spéciale, le NEXEN descend sous la surface et réactive la composition originelle de son noyau : Engine et Nexus fusionnent pour créer un sas entre les deux univers, un abri commun, un point de convergence.",
     
     ticketLink: "#",
-    facebookLink: "#",
+    facebookLink: "https://www.facebook.com/events/1132770079034517",
     artists: [
       {
         id: "a3",

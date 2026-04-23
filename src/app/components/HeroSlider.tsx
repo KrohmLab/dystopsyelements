@@ -9,11 +9,13 @@ export function HeroSlider() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [direction, setDirection] = useState(1);
 
-  if (!MOCK_EVENTS || MOCK_EVENTS.length === 0) {
+  const upcomingEvents = MOCK_EVENTS.filter(event => new Date(event.date) >= new Date());
+
+  if (!upcomingEvents || upcomingEvents.length === 0) {
     return <div className="w-full h-screen bg-[#050505] flex items-center justify-center text-white">Chargement du système...</div>;
   }
 
-  const currentEvent = MOCK_EVENTS[currentSlide];
+  const currentEvent = upcomingEvents[currentSlide];
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -27,19 +29,19 @@ export function HeroSlider() {
   useEffect(() => {
     const timer = setInterval(() => {
       setDirection(1);
-      setCurrentSlide((prev) => (prev + 1) % MOCK_EVENTS.length);
+      setCurrentSlide((prev) => (prev + 1) % upcomingEvents.length);
     }, 6000);
     return () => clearInterval(timer);
-  }, []);
+  }, [upcomingEvents.length]);
 
   const handleNext = () => {
     setDirection(1);
-    setCurrentSlide((prev) => (prev + 1) % MOCK_EVENTS.length);
+    setCurrentSlide((prev) => (prev + 1) % upcomingEvents.length);
   };
 
   const handlePrev = () => {
     setDirection(-1);
-    setCurrentSlide((prev) => (prev - 1 + MOCK_EVENTS.length) % MOCK_EVENTS.length);
+    setCurrentSlide((prev) => (prev - 1 + upcomingEvents.length) % upcomingEvents.length);
   };
 
   return (
@@ -100,7 +102,7 @@ export function HeroSlider() {
                     <Calendar className="w-4 h-4 xl:w-5 xl:h-5 text-[#75feed]" />
                   </div>
                   <span className="font-rajdhani text-lg xl:text-xl text-gray-300 font-medium tracking-wide capitalize">
-                    {formatDate(currentEvent.date)}
+                    {currentEvent.displayDate || formatDate(currentEvent.date)}
                   </span>
                 </div>
                 <div className="flex items-center space-x-3 text-gray-300">
