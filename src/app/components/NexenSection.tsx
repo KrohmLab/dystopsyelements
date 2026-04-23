@@ -51,10 +51,10 @@ export function NexenSection() {
       {/* Container principal */}
       <div className="relative z-10 flex flex-col items-center px-4 w-full max-w-5xl">
         
-        {/* 1. Logo - Marge négative maximale pour supprimer tout l'espace */}
+        {/* 1. Logo - Marge négative haute et basse pour coller aux éléments */}
         <motion.div
           whileHover={{ scale: 1.02, filter: "drop-shadow(0 0 25px rgba(117, 254, 237, 0.4))" }}
-          className="relative group cursor-pointer -mt-8 md:-mt-14 -mb-6 md:-mb-10"
+          className="relative group cursor-pointer -mt-6 md:-mt-10 -mb-4 md:-mb-6"
         >
           <img 
             src={logoNexen} 
@@ -63,7 +63,7 @@ export function NexenSection() {
           />
         </motion.div>
 
-        {/* 2. Boutons secondaires - Collés au logo */}
+        {/* 2. Boutons secondaires - On force la marge haute à zéro */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4 w-full max-w-3xl mt-0">
           {[
             { label: "Programmation", to: "/programmation", icon: Music },
