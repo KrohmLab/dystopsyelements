@@ -55,7 +55,7 @@ export function Navbar() {
       <div 
         className={`absolute inset-0 z-[-2] transition-all duration-500 ${
           isScrolled 
-            ? "bg-[#020202]/90 backdrop-blur-xl border-b border-[#75feed]/30 shadow-[0_4px_30px_rgba(117,254,237,0.1)]" 
+            ? "bg-[#020202]/40 backdrop-blur-xl border-b border-[#75feed]/30 shadow-[0_4px_30px_rgba(117,254,237,0.1)]" 
             : "bg-transparent border-b border-transparent shadow-none"
         }`}
       />
