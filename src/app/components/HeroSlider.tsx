@@ -9,10 +9,11 @@ export function HeroSlider() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [direction, setDirection] = useState(1);
 
+  // Filtrage des événements à venir
   const upcomingEvents = MOCK_EVENTS.filter(event => new Date(event.date) >= new Date());
 
   if (!upcomingEvents || upcomingEvents.length === 0) {
-    return <div className="w-full h-screen bg-[#050505] flex items-center justify-center text-white">Chargement du système...</div>;
+    return <div className="w-full h-screen bg-[#050505] flex items-center justify-center text-white font-orbitron tracking-widest uppercase">Initialisation du système...</div>;
   }
 
   const currentEvent = upcomingEvents[currentSlide];
@@ -45,7 +46,10 @@ export function HeroSlider() {
   };
 
   return (
-    <section className="relative w-full h-[100dvh] bg-[#050505] overflow-hidden flex items-center justify-center">
+    <section 
+      className="relative w-full bg-[#050505] overflow-hidden flex items-center justify-center"
+      style={{ height: 'calc(var(--vh, 1vh) * 100)' }}
+    >
       
       <div className="absolute inset-0 z-0">
         <AnimatePresence initial={false} custom={direction}>
