@@ -45,7 +45,6 @@ export function HeroSlider() {
   return (
     <section className="relative w-full h-[100dvh] bg-[#050505] overflow-hidden flex items-center justify-center">
       
-      {/* FOND IMMERSIF */}
       <div className="absolute inset-0 z-0">
         <AnimatePresence initial={false} custom={direction}>
           <motion.div
@@ -67,16 +66,11 @@ export function HeroSlider() {
         </AnimatePresence>
       </div>
 
-      {/* ZONE DE CONFINEMENT */}
       <div className="relative z-10 w-full h-full max-w-[1920px] max-h-[1080px] flex items-center justify-center">
         
         <CyberFrame />
         
-        {/* ZONE DE CONFINEMENT SÉCURISÉE ET DÉCALÉE À DROITE
-            On utilise pl (padding-left) plus grand que pr (padding-right) 
-            sur les écrans larges (lg et xl) pour pousser le texte.
-        */}
-        <div className="absolute inset-0 z-20 flex flex-col justify-center items-center xl:items-start px-8 sm:px-16 md:px-[10%] lg:pl-[16%] lg:pr-[10%] xl:pl-[18%] xl:pr-[10%]">
+        <div className="absolute inset-0 z-20 flex flex-col justify-center items-center xl:items-start px-8 sm:px-[10%] md:px-[15%] lg:px-[18%] xl:pl-[16%] xl:pr-[8%]">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentSlide}
@@ -84,9 +78,8 @@ export function HeroSlider() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -30 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="max-w-3xl w-full flex flex-col items-center xl:items-start"
+              className="max-w-5xl w-full flex flex-col items-center xl:items-start"
             >
-              {/* SOUS-TITRE PERSONNALISÉ */}
               <div className="inline-flex items-center space-x-2 px-3 py-1 bg-[#fc029b]/10 border border-[#fc029b]/50 rounded-sm mb-3 xl:mb-4">
                 <span className="w-2 h-2 rounded-full bg-[#fc029b] animate-pulse" />
                 <span className="text-[#fc029b] font-orbitron text-[10px] md:text-xs font-bold uppercase tracking-widest">
@@ -95,7 +88,7 @@ export function HeroSlider() {
               </div>
 
               <h1 
-                className="font-orbitron font-black text-white mb-4 xl:mb-6 leading-[1.1] xl:leading-tight glitch-effect tracking-tighter uppercase text-center xl:text-left text-[clamp(2rem,5vw,5.5rem)] text-balance"
+                className="font-orbitron font-black text-white mb-4 xl:mb-6 leading-[1.1] xl:leading-tight glitch-effect tracking-tighter uppercase text-center xl:text-left text-[clamp(2.2rem,6vw,5.5rem)] text-balance w-full"
                 data-text={currentEvent.title}
               >
                 {currentEvent.title}
@@ -139,19 +132,18 @@ export function HeroSlider() {
           </AnimatePresence>
         </div>
 
-        {/* Boutons de navigation */}
-        <div className="absolute bottom-[10%] right-[10%] z-20 hidden xl:flex space-x-4">
+        <div className="absolute bottom-8 right-8 xl:bottom-10 xl:right-12 z-30 hidden xl:flex space-x-3 pointer-events-auto">
           <button 
             onClick={handlePrev}
-            className="p-3 border border-gray-700 bg-[#050505]/50 hover:border-[#75feed] hover:text-[#75feed] text-gray-400 transition-all backdrop-blur-md pointer-events-auto"
+            className="p-2 border border-gray-700 bg-[#050505]/80 hover:border-[#75feed] hover:text-[#75feed] text-gray-400 transition-all backdrop-blur-md"
           >
-            <ChevronLeft className="w-6 h-6" />
+            <ChevronLeft className="w-5 h-5" />
           </button>
           <button 
             onClick={handleNext}
-            className="p-3 border border-gray-700 bg-[#050505]/50 hover:border-[#75feed] hover:text-[#75feed] text-gray-400 transition-all backdrop-blur-md pointer-events-auto"
+            className="p-2 border border-gray-700 bg-[#050505]/80 hover:border-[#75feed] hover:text-[#75feed] text-gray-400 transition-all backdrop-blur-md"
           >
-            <ChevronRight className="w-6 h-6" />
+            <ChevronRight className="w-5 h-5" />
           </button>
         </div>
       </div>
