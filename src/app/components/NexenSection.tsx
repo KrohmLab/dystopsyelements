@@ -1,11 +1,12 @@
 import { useRef, MouseEvent } from "react";
-import { motion, useScroll, useTransform, useSpring, useMotionValue } from "motion/react";
+import { motion, useSpring, useMotionValue, useTransform } from "motion/react";
 import { Link } from "react-router";
-import { Sparkles, ArrowRight } from "lucide-react";
+import { ArrowRight, Music, Globe, Info, Ticket } from "lucide-react";
 
 import logoNexen from "../../imports/Logo-NEXEN.png";
 import fondVierge from "../../imports/NXN26---Fond-Vierge-(Carré).jpg";
 import ecaillesFull from "../../imports/Ecailles_FULL.jpg";
+import patternDivider from "../../imports/Pattern_01-solo.png";
 
 export function NexenSection() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -17,14 +18,8 @@ export function NexenSection() {
   const smoothX = useSpring(mouseX, springConfig);
   const smoothY = useSpring(mouseY, springConfig);
 
-  const bgX = useTransform(smoothX, [-0.5, 0.5], ["-3%", "3%"]);
-  const bgY = useTransform(smoothY, [-0.5, 0.5], ["-3%", "3%"]);
-
-  const orb1X = useTransform(smoothX, [-0.5, 0.5], ["-15%", "15%"]);
-  const orb1Y = useTransform(smoothY, [-0.5, 0.5], ["-15%", "15%"]);
-
-  const orb2X = useTransform(smoothX, [-0.5, 0.5], ["15%", "-15%"]);
-  const orb2Y = useTransform(smoothY, [-0.5, 0.5], ["15%", "-15%"]);
+  const bgX = useTransform(smoothX, [-0.5, 0.5], ["-2%", "2%"]);
+  const bgY = useTransform(smoothY, [-0.5, 0.5], ["-2%", "2%"]);
 
   const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
     if (!containerRef.current) return;
@@ -35,119 +30,100 @@ export function NexenSection() {
     mouseY.set(y);
   };
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"]
-  });
-
-  const yParallax = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
-  const yContent = useTransform(scrollYProgress, [0, 1], ["15%", "-15%"]);
-
   return (
     <section 
       ref={containerRef}
       onMouseMove={handleMouseMove}
-      className="relative w-full h-[80vh] min-h-[600px] overflow-hidden flex items-center justify-center border-y border-[#fc029b]/30 bg-[#020202]"
+      className="relative w-full overflow-hidden flex flex-col items-center justify-center border-y border-[#fc029b]/30 bg-[#020202] pt-0 pb-10 md:pb-14"
     >
-      {/* Interactive Background Group */}
+      {/* Background Layers */}
       <motion.div 
-        className="absolute inset-0 z-0 w-[110%] h-[110%] -left-[5%] -top-[5%]"
+        className="absolute inset-0 z-0 w-[105%] h-[105%] -left-[2.5%] -top-[2.5%]"
         style={{ x: bgX, y: bgY }}
       >
-        <motion.div className="w-full h-full relative" style={{ y: yParallax }}>
-          <div 
-            className="absolute inset-0 bg-cover bg-center opacity-60 mix-blend-screen"
-            style={{ backgroundImage: `url("${fondVierge}")` }}
-          />
-          <div 
-            className="absolute inset-0 bg-cover bg-center opacity-40 mix-blend-overlay"
-            style={{ backgroundImage: `url("${ecaillesFull}")` }}
-          />
-        </motion.div>
+        <div className="absolute inset-0 bg-cover bg-center opacity-40 mix-blend-screen" style={{ backgroundImage: `url("${fondVierge}")` }} />
+        <div className="absolute inset-0 bg-cover bg-center opacity-30 mix-blend-overlay" style={{ backgroundImage: `url("${ecaillesFull}")` }} />
       </motion.div>
 
-      {/* Cyber Grid & Vignette Overlay */}
+      {/* Overlays */}
       <div className="absolute inset-0 z-0 pointer-events-none bg-[linear-gradient(rgba(252,2,155,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(252,2,155,0.03)_1px,transparent_1px)] bg-[size:40px_40px]" />
-      <div className="absolute inset-0 z-0 pointer-events-none bg-gradient-to-t from-[#020202] via-transparent to-[#020202]/80" />
       
-      {/* Floating Orbs linked to mouse */}
-      <motion.div 
-        className="absolute w-96 h-96 bg-[#fc029b] rounded-full blur-[150px] opacity-30 pointer-events-none z-0"
-        style={{ x: orb1X, y: orb1Y }}
-        animate={{ scale: [1, 1.2, 1] }}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.div 
-        className="absolute right-0 w-[500px] h-[500px] bg-[#75feed] rounded-full blur-[200px] opacity-20 pointer-events-none z-0"
-        style={{ x: orb2X, y: orb2Y }}
-        animate={{ scale: [1.2, 1, 1.2] }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-      />
-
-      {/* Content Container */}
-      <motion.div 
-        className="relative z-10 flex flex-col items-center justify-center text-center px-4"
-        style={{ y: yContent }}
-      >
-        {/* Animated Logo */}
+      {/* Container principal */}
+      <div className="relative z-10 flex flex-col items-center px-4 w-full max-w-5xl">
+        
+        {/* 1. Logo - Marge négative haute et basse pour coller aux éléments */}
         <motion.div
-          whileHover={{ scale: 1.05, filter: "drop-shadow(0 0 25px rgba(252, 2, 155, 0.6))" }}
-          transition={{ type: "spring", stiffness: 300, damping: 15 }}
-          className="relative mb-12 group cursor-pointer"
+          whileHover={{ scale: 1.02, filter: "drop-shadow(0 0 25px rgba(117, 254, 237, 0.4))" }}
+          className="relative group cursor-pointer -mt-6 md:-mt-10 -mb-4 md:-mb-6"
         >
           <img 
             src={logoNexen} 
-            alt="Nexen Festival Logo" 
-            className="w-full max-w-[400px] md:max-w-[600px] h-auto drop-shadow-[0_0_15px_rgba(117,254,237,0.3)] z-10 relative"
+            alt="Nexen" 
+            className="w-full max-w-[320px] md:max-w-[500px] lg:max-w-[550px] h-auto drop-shadow-[0_0_15px_rgba(117,254,237,0.2)]"
           />
-          
-          {/* Glitch Overlay on Hover */}
-          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-150 pointer-events-none">
-            <img src={logoNexen} alt="" className="absolute inset-0 translate-x-2 -translate-y-1 opacity-70 filter hue-rotate-180 mix-blend-screen" />
-            <img src={logoNexen} alt="" className="absolute inset-0 -translate-x-2 translate-y-1 opacity-70 filter hue-rotate-[250deg] mix-blend-screen" />
-          </div>
         </motion.div>
 
-        {/* CTA Button */}
-        <Link to="/festival" className="group">
-          <motion.div 
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="relative px-8 py-4 bg-[#050505]/60 backdrop-blur-md border border-[#fc029b] overflow-hidden"
+        {/* 2. Boutons secondaires - On force la marge haute à zéro */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4 w-full max-w-3xl mt-0">
+          {[
+            { label: "Programmation", to: "/programmation", icon: Music },
+            { label: "L'univers", to: "/univers", icon: Globe },
+            { label: "Infos Pratiques", to: "/infos", icon: Info },
+          ].map((btn) => (
+            <Link key={btn.label} to={btn.to} className="group/nav relative block w-full">
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="relative h-12 md:h-14 bg-[#050505]/40 backdrop-blur-md border border-[#75feed]/20 overflow-hidden flex items-center justify-center transition-all duration-300"
+              >
+                <span className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#75feed] to-transparent -translate-x-full group-hover/nav:translate-x-full transition-transform duration-1000" />
+                <span className="absolute bottom-0 right-0 w-full h-[1px] bg-gradient-to-l from-transparent via-[#75feed] to-transparent translate-x-full group-hover/nav:-translate-x-full transition-transform duration-1000" />
+                <span className="absolute inset-0 bg-[#75feed]/5 translate-y-full group-hover/nav:translate-y-0 transition-transform duration-300" />
+                <div className="relative z-10 flex items-center space-x-3">
+                  <btn.icon className="w-3.5 h-3.5 text-[#75feed]" />
+                  <span className="font-orbitron text-[10px] font-bold tracking-[0.2em] uppercase text-gray-300 group-hover/nav:text-white">
+                    {btn.label}
+                  </span>
+                </div>
+              </motion.div>
+            </Link>
+          ))}
+        </div>
+
+        {/* 3. Divider */}
+        <img 
+          src={patternDivider} 
+          alt="divider" 
+          className="w-full max-w-[550px] md:max-w-[750px] h-auto opacity-40 select-none pointer-events-none scale-x-[-1] mt-4 md:mt-6" 
+        />
+
+        {/* 4. Billetterie */}
+        <div className="w-full flex justify-center mt-4 md:mt-6">
+          <Link 
+            to="/events" 
+            className="relative inline-flex items-center justify-center px-14 py-5 md:px-20 md:py-6 font-orbitron text-base md:text-lg font-bold uppercase tracking-[0.3em] text-white group overflow-hidden"
+            style={{ clipPath: 'polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px)' }}
           >
-            {/* Animated Cyber Borders */}
-            <span className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#75feed] to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
-            <span className="absolute bottom-0 right-0 w-full h-[2px] bg-gradient-to-l from-transparent via-[#fc029b] to-transparent translate-x-full group-hover:-translate-x-full transition-transform duration-1000 ease-in-out" />
+            <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-[#75feed] via-[#fc029b] to-[#75feed] bg-[size:200%_auto] group-hover:bg-right transition-all duration-700 ease-in-out" />
+            <span className="absolute inset-[3px] bg-[#020202]" style={{ clipPath: 'polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px)' }} />
             
-            {/* Fill Scanner */}
-            <span className="absolute inset-0 bg-[#fc029b]/10 translate-y-[100%] group-hover:translate-y-0 transition-transform duration-300 ease-in-out" />
-
-            <div className="relative z-10 flex items-center space-x-3 text-white font-orbitron font-bold tracking-[0.2em] uppercase">
-              <Sparkles className="w-5 h-5 text-[#75feed] group-hover:animate-pulse" />
-              <span className="group-hover:text-glow-pink transition-all">Rejoindre le Nexen</span>
-              <ArrowRight className="w-5 h-5 text-[#fc029b] group-hover:translate-x-1 transition-transform" />
+            <div className="relative z-10 flex items-center space-x-4 group-hover:scale-105 transition-transform duration-300">
+              <Ticket className="w-6 h-6 text-[#fc029b]" />
+              <span className="group-hover:text-glow-cyan transition-all">Billetterie</span>
+              <ArrowRight className="w-5 h-5 text-[#75feed] group-hover:translate-x-2 transition-transform" />
             </div>
-          </motion.div>
-        </Link>
-      </motion.div>
 
-      {/* Cyberpunk UI Corner Accents */}
-      <div className="absolute top-8 left-8 border-l-2 border-t-2 border-[#75feed] w-8 h-8 opacity-60 z-10 pointer-events-none" />
-      <div className="absolute bottom-8 right-8 border-r-2 border-b-2 border-[#fc029b] w-8 h-8 opacity-60 z-10 pointer-events-none" />
-      
-      {/* Abstract Tech Bars */}
-      <div className="absolute top-1/2 left-4 -translate-y-1/2 flex flex-col space-y-2 opacity-40 z-10 pointer-events-none">
-        <span className="w-[3px] h-8 bg-[#75feed] shadow-[0_0_8px_#75feed]" />
-        <span className="w-[3px] h-4 bg-[#75feed]" />
-        <span className="w-[3px] h-12 bg-[#75feed] shadow-[0_0_8px_#75feed]" />
+            <span className="absolute top-0 left-[-100%] w-1/2 h-full bg-gradient-to-r from-transparent via-white/10 to-transparent transform skew-x-[-20deg] group-hover:animate-[slide-right_1.5s_ease-in-out_infinite]" />
+          </Link>
+        </div>
       </div>
       
-      <div className="absolute top-1/2 right-4 -translate-y-1/2 flex flex-col items-end space-y-2 opacity-40 z-10 pointer-events-none">
-        <div className="font-rajdhani text-[10px] tracking-widest text-[#fc029b] -rotate-90 origin-right translate-x-2 -translate-y-8 absolute right-4 top-[-100px]">NEXEN_OVERRIDE</div>
-        <span className="w-[3px] h-12 bg-[#fc029b] shadow-[0_0_8px_#fc029b]" />
-        <span className="w-[3px] h-4 bg-[#fc029b]" />
-        <span className="w-[3px] h-8 bg-[#fc029b] shadow-[0_0_8px_#fc029b]" />
-      </div>
+      <style dangerouslySetInnerHTML={{__html: `
+        @keyframes slide-right {
+          0% { left: -100%; }
+          100% { left: 200%; }
+        }
+      `}} />
     </section>
   );
 }
