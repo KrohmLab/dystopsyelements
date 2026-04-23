@@ -8,11 +8,39 @@ import { MOCK_EVENTS } from "../data/events";
 export function HeroSlider() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [direction, setDirection] = useState(1);
+  const [fixedHeight, setFixedHeight] = useState<string>("100vh");
+
+  useEffect(() => {
+    const height = window.innerHeight;
+    setFixedHeight(`${height}px`);
+
+    const handleOrientationChange = () => {
+      setTimeout(() => {
+        setFixedHeight(`${window.innerHeight}px`);
+      }, 200);
+    };
+
+    window.addEventListener("orientationchange", handleOrientationChange);
+    return () => window.removeEventListener("orientationchange", handleOrientationChange);
+  }, []);
 
   const upcomingEvents = MOCK_EVENTS.filter(event => new Date(event.date) >= new Date());
 
+  useEffect(() => {
+    if (upcomingEvents.length <= 1) return;
+    const timer = setInterval(() => {
+      setDirection(1);
+      setCurrentSlide((prev) => (prev + 1) % upcomingEvents.length);
+    }, 6000);
+    return () => clearInterval(timer);
+  }, [upcomingEvents.length]);
+
   if (!upcomingEvents || upcomingEvents.length === 0) {
-    return <div className="w-full h-screen bg-[#050505] flex items-center justify-center text-white">Chargement du système...</div>;
+    return (
+      <div style={{ height: fixedHeight }} className="w-full bg-[#050505] flex items-center justify-center text-white font-orbitron tracking-widest uppercase">
+        Initialisation du système...
+      </div>
+    );
   }
 
   const currentEvent = upcomingEvents[currentSlide];
@@ -26,14 +54,6 @@ export function HeroSlider() {
     });
   };
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setDirection(1);
-      setCurrentSlide((prev) => (prev + 1) % upcomingEvents.length);
-    }, 6000);
-    return () => clearInterval(timer);
-  }, [upcomingEvents.length]);
-
   const handleNext = () => {
     setDirection(1);
     setCurrentSlide((prev) => (prev + 1) % upcomingEvents.length);
@@ -45,8 +65,10 @@ export function HeroSlider() {
   };
 
   return (
-    <section className="relative w-full h-[100dvh] bg-[#050505] overflow-hidden flex items-center justify-center">
-      
+    <section 
+      className="relative w-full bg-[#050505] overflow-hidden flex items-center justify-center"
+      style={{ height: fixedHeight }}
+    >
       <div className="absolute inset-0 z-0">
         <AnimatePresence initial={false} custom={direction}>
           <motion.div
@@ -69,7 +91,6 @@ export function HeroSlider() {
       </div>
 
       <div className="relative z-10 w-full h-full max-w-[1920px] max-h-[1080px] flex items-center justify-center">
-        
         <CyberFrame />
         
         <div className="absolute inset-0 z-20 flex flex-col justify-center items-center xl:items-start px-8 sm:px-[10%] md:px-[15%] lg:px-[18%] xl:pl-[16%] xl:pr-[8%]">
@@ -135,16 +156,10 @@ export function HeroSlider() {
         </div>
 
         <div className="absolute bottom-8 right-8 xl:bottom-10 xl:right-12 z-30 hidden xl:flex space-x-3 pointer-events-auto">
-          <button 
-            onClick={handlePrev}
-            className="p-2 border border-gray-700 bg-[#050505]/80 hover:border-[#75feed] hover:text-[#75feed] text-gray-400 transition-all backdrop-blur-md"
-          >
+          <button onClick={handlePrev} className="p-2 border border-gray-700 bg-[#050505]/80 hover:border-[#75feed] hover:text-[#75feed] text-gray-400 transition-all backdrop-blur-md">
             <ChevronLeft className="w-5 h-5" />
           </button>
-          <button 
-            onClick={handleNext}
-            className="p-2 border border-gray-700 bg-[#050505]/80 hover:border-[#75feed] hover:text-[#75feed] text-gray-400 transition-all backdrop-blur-md"
-          >
+          <button onClick={handleNext} className="p-2 border border-gray-700 bg-[#050505]/80 hover:border-[#75feed] hover:text-[#75feed] text-gray-400 transition-all backdrop-blur-md">
             <ChevronRight className="w-5 h-5" />
           </button>
         </div>
