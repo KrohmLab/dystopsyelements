@@ -53,10 +53,10 @@ export function Navbar() {
       
       {/* CALQUE 1 : LE FOND SOMBRE ET LE FLOU (z-[-2]) */}
       <div 
-        className={`absolute inset-0 z-[-2] transition-all duration-500 ${
+        className={`absolute inset-0 z-[-2] transition-all duration-500 border-b ${
           isScrolled 
-            ? "bg-[#020202]/40 backdrop-blur-xl border-b border-[#75feed]/30 shadow-[0_4px_30px_rgba(117,254,237,0.1)]" 
-            : "bg-transparent border-b border-transparent shadow-none"
+            ? "bg-[#020202]/40 backdrop-blur-2xl border-[#75feed]/30 shadow-[0_4px_30px_rgba(117,254,237,0.1)]" 
+            : "bg-transparent border-transparent shadow-none"
         }`}
       />
 
