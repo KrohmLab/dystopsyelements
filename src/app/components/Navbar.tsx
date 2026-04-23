@@ -51,22 +51,25 @@ export function Navbar() {
   return (
     <nav className="fixed top-0 w-full z-50 pt-4 pb-3 md:py-3">
       
-      {/* CALQUE 1 : LE FOND SOMBRE ET LE FLOU (z-[-2]) */}
+      {/* CALQUE 1 : LE FOND SOMBRE ET LE FLOU */}
       <div 
-  className={`absolute inset-0 z-[-2] transition-all duration-500 ${
-    // Si le menu mobile est ouvert, on met un fond noir opaque
-    isOpen 
-      ? "bg-[#020202] opacity-100 backdrop-blur-none" 
-      : isScrolled 
-        ? "bg-[#020202]/40 backdrop-blur-xl border-b border-[#75feed]/30 shadow-[0_4px_30px_rgba(117,254,237,0.1)]" 
-        : "bg-transparent border-b border-transparent shadow-none"
-  }`}
-/>
+        className={`absolute inset-0 z-[-2] transition-all duration-500 ${
+          isOpen 
+            ? "bg-[#020202] opacity-100 backdrop-blur-none" 
+            : isScrolled 
+              ? "bg-[#020202]/40 backdrop-blur-xl border-b border-[#75feed]/30 shadow-[0_4px_30px_rgba(117,254,237,0.1)]" 
+              : "bg-transparent border-b border-transparent shadow-none"
+        }`}
+      />
 
-      {/* CALQUE 2 : LA GRILLE CYBERPUNK (z-[-1], au dessus du flou mais sous le texte) */}
+      {/* CALQUE 2 : LA GRILLE CYBERPUNK */}
       <div 
         className={`absolute inset-0 z-[-1] pointer-events-none bg-[linear-gradient(rgba(117,254,237,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(117,254,237,0.05)_1px,transparent_1px)] bg-[size:20px_20px] transition-opacity duration-500 ${
-          isScrolled ? "opacity-100" : "opacity-0"
+          isOpen 
+            ? "opacity-0" 
+            : isScrolled 
+              ? "opacity-100" 
+              : "opacity-0"
         }`} 
       />
 
@@ -82,7 +85,6 @@ export function Navbar() {
         )}
       </AnimatePresence>
 
-      {/* CONTENU DU MENU - MODIFICATION ICI : px-10 md:px-16 lg:px-20 */}
       <div className="relative z-10 max-w-7xl mx-auto px-8 md:px-16 lg:px-20">
         <div className="flex justify-between items-center h-14">
           
@@ -150,7 +152,7 @@ export function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-[#050505]/95 backdrop-blur-xl border-b border-[#75feed]/30 overflow-hidden relative z-10"
+            className="md:hidden bg-[#020202] border-b border-[#75feed]/30 overflow-hidden relative z-10"
           >
             <div className="px-4 pt-4 pb-6 space-y-2">
               {mobileLinks.map((item) => (
