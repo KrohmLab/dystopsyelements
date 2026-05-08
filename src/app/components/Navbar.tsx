@@ -35,7 +35,8 @@ export function Navbar() {
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    // Ajout de { passive: true } pour que le scroll ne freeze pas pendant l'animation
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isScrolled]);
 
@@ -58,7 +59,8 @@ export function Navbar() {
             ? "bg-[#020202] opacity-100 backdrop-blur-none" 
             : isScrolled 
               ? "bg-[#020202]/40 backdrop-blur-xl border-b border-[#75feed]/30 shadow-[0_4px_30px_rgba(117,254,237,0.1)]" 
-              : "bg-transparent border-b border-transparent shadow-none"
+              // La correction est ici : on ajoute "backdrop-blur-none" à l'état par défaut !
+              : "bg-transparent backdrop-blur-none border-b border-transparent shadow-none"
         }`}
       />
 

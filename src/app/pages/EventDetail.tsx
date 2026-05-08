@@ -28,11 +28,9 @@ import { FloatingPattern } from "../components/FloatingPattern";
 export function EventDetail() {
   const { id } = useParams();
   const event = MOCK_EVENTS.find((e) => e.id === id);
-  const [selectedArtist, setSelectedArtist] =
-    useState<Artist | null>(null);
+  const [selectedArtist, setSelectedArtist] = useState<Artist | null>(null);
 
-  const [isDescriptionExpanded, setIsDescriptionExpanded] =
-    useState(false);
+  const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
 
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -75,8 +73,17 @@ export function EventDetail() {
     );
   }
 
-  const isUpcoming =
-    new Date(event.date) >= new Date("2026-04-22");
+  // --- CORRECTION DE LA DATE ICI ---
+  const isUpcoming = (() => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // On remet la vraie date du jour à minuit
+    
+    const eventDate = new Date(event.date);
+    eventDate.setHours(0, 0, 0, 0);
+    
+    return eventDate >= today;
+  })();
+  // ---------------------------------
 
   return (
     <div className="relative bg-[#020202] text-white min-h-screen overflow-x-hidden">
