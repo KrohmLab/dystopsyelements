@@ -12,7 +12,7 @@ export function HeroSlider() {
 
   // 1. GESTION DE LA HAUTEUR (Anti-saut mobile + Fix chargement)
   useEffect(() => {
-    let lastWidth = window.innerWidth; // On mémorise la largeur au chargement
+    let lastWidth = window.innerWidth;
 
     const updateHeight = () => {
       const height = window.innerHeight;
@@ -23,14 +23,11 @@ export function HeroSlider() {
       }
     };
 
-    // Fonction de redimensionnement intelligente
     const handleResize = () => {
-      // Si la largeur a changé (rotation ou redimensionnement fenêtre PC)
       if (window.innerWidth !== lastWidth) {
         lastWidth = window.innerWidth;
         updateHeight();
       }
-      // Sinon (scroll sur mobile qui masque la barre), on ne fait RIEN !
     };
 
     updateHeight();
@@ -55,7 +52,7 @@ export function HeroSlider() {
   });
 
   if (!upcomingEvents || upcomingEvents.length === 0) {
-    upcomingEvents = MOCK_EVENTS; // Failsafe
+    upcomingEvents = MOCK_EVENTS;
   }
 
   // 3. LOGIQUE SLIDER
@@ -186,8 +183,8 @@ export function HeroSlider() {
           </AnimatePresence>
         </div>
 
-        {/* NAVIGATION HUD : Synchronisée avec les breakpoints du texte */}
-        <div className="absolute z-30 pointer-events-auto flex items-center justify-center gap-4 sm:gap-6 left-0 right-0 bottom-8 md:bottom-24 lg:bottom-20 xl:bottom-16 xl:left-auto xl:right-16">
+        {/* NAVIGATION HUD : Centrée PARTOUT sauf sur les très grands écrans (xl) */}
+        <div className="absolute z-30 pointer-events-auto flex items-center justify-center gap-4 sm:gap-6 left-0 right-0 bottom-8 md:bottom-38 lg:bottom-38 xl:left-auto xl:right-[11%] xl:bottom-[16%]">
           <button 
             onClick={handlePrev}
             className="p-3 border border-[#75feed]/30 text-[#75feed] hover:bg-[#75feed] hover:text-black transition-all rounded-full bg-[#050505]/60 backdrop-blur-md"
