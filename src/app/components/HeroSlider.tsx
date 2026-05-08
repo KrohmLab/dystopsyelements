@@ -10,7 +10,10 @@ export function HeroSlider() {
   const [direction, setDirection] = useState(1);
   const [fixedHeight, setFixedHeight] = useState<string>("100vh");
 
+  // 1. GESTION DE LA HAUTEUR (Anti-saut mobile + Fix chargement)
   useEffect(() => {
+    let lastWidth = window.innerWidth; // On mémorise la largeur au chargement
+
     const updateHeight = () => {
       const height = window.innerHeight;
       if (height > 0) {
@@ -19,19 +22,32 @@ export function HeroSlider() {
         setFixedHeight("100vh");
       }
     };
+
+    // Fonction de redimensionnement intelligente
+    const handleResize = () => {
+      // Si la largeur a changé (rotation ou redimensionnement fenêtre PC)
+      if (window.innerWidth !== lastWidth) {
+        lastWidth = window.innerWidth;
+        updateHeight();
+      }
+      // Sinon (scroll sur mobile qui masque la barre), on ne fait RIEN !
+    };
+
     updateHeight();
     const fallbackTimer = setTimeout(updateHeight, 500);
     const handleOrientationChange = () => setTimeout(updateHeight, 200);
 
-    window.addEventListener("resize", updateHeight);
+    window.addEventListener("resize", handleResize);
     window.addEventListener("orientationchange", handleOrientationChange);
+    
     return () => {
       clearTimeout(fallbackTimer);
-      window.removeEventListener("resize", updateHeight);
+      window.removeEventListener("resize", handleResize);
       window.removeEventListener("orientationchange", handleOrientationChange);
     };
   }, []);
 
+  // 2. FILTRE ÉVÉNEMENTS (Sécurité chargement)
   let upcomingEvents = MOCK_EVENTS.filter(event => {
     if (!event.date) return false;
     const eventDate = new Date(event.date);
@@ -39,9 +55,10 @@ export function HeroSlider() {
   });
 
   if (!upcomingEvents || upcomingEvents.length === 0) {
-    upcomingEvents = MOCK_EVENTS;
+    upcomingEvents = MOCK_EVENTS; // Failsafe
   }
 
+  // 3. LOGIQUE SLIDER
   useEffect(() => {
     if (upcomingEvents.length <= 1) return;
     const timer = setInterval(() => {
@@ -169,7 +186,8 @@ export function HeroSlider() {
           </AnimatePresence>
         </div>
 
-        <div className="absolute z-30 pointer-events-auto flex items-center justify-center gap-4 sm:gap-6 left-0 right-0 bottom-8 md:bottom-40 lg:bottom-40 xl:bottom-16 xl:left-auto xl:right-16">
+        {/* NAVIGATION HUD : Synchronisée avec les breakpoints du texte */}
+        <div className="absolute z-30 pointer-events-auto flex items-center justify-center gap-4 sm:gap-6 left-0 right-0 bottom-8 md:bottom-24 lg:bottom-20 xl:bottom-16 xl:left-auto xl:right-16">
           <button 
             onClick={handlePrev}
             className="p-3 border border-[#75feed]/30 text-[#75feed] hover:bg-[#75feed] hover:text-black transition-all rounded-full bg-[#050505]/60 backdrop-blur-md"
