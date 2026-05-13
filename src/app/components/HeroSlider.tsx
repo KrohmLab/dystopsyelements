@@ -8,8 +8,43 @@ import { MOCK_EVENTS } from "../data/events";
 export function HeroSlider() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [direction, setDirection] = useState(1);
+  const [fixedHeight, setFixedHeight] = useState<string>("100vh");
 
-  // 1. FILTRE ÉVÉNEMENTS (Sécurité chargement)
+  // 1. GESTION DE LA HAUTEUR (Anti-saut mobile + Fix chargement)
+  useEffect(() => {
+    let lastWidth = window.innerWidth;
+
+    const updateHeight = () => {
+      const height = window.innerHeight;
+      if (height > 0) {
+        setFixedHeight(`${height}px`);
+      } else {
+        setFixedHeight("100vh");
+      }
+    };
+
+    const handleResize = () => {
+      if (window.innerWidth !== lastWidth) {
+        lastWidth = window.innerWidth;
+        updateHeight();
+      }
+    };
+
+    updateHeight();
+    const fallbackTimer = setTimeout(updateHeight, 500);
+    const handleOrientationChange = () => setTimeout(updateHeight, 200);
+
+    window.addEventListener("resize", handleResize);
+    window.addEventListener("orientationchange", handleOrientationChange);
+    
+    return () => {
+      clearTimeout(fallbackTimer);
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("orientationchange", handleOrientationChange);
+    };
+  }, []);
+
+  // 2. FILTRE ÉVÉNEMENTS (Sécurité chargement)
   let upcomingEvents = MOCK_EVENTS.filter(event => {
     if (!event.date) return false;
     const eventDate = new Date(event.date);
@@ -20,7 +55,7 @@ export function HeroSlider() {
     upcomingEvents = MOCK_EVENTS;
   }
 
-  // 2. LOGIQUE SLIDER
+  // 3. LOGIQUE SLIDER
   useEffect(() => {
     if (upcomingEvents.length <= 1) return;
     const timer = setInterval(() => {
@@ -32,7 +67,7 @@ export function HeroSlider() {
 
   if (!upcomingEvents || upcomingEvents.length === 0) {
     return (
-      <div className="w-full min-h-[100dvh] h-[100dvh] bg-[#050505] flex items-center justify-center text-white font-orbitron tracking-widest uppercase">
+      <div style={{ height: fixedHeight }} className="w-full bg-[#050505] flex items-center justify-center text-white font-orbitron tracking-widest uppercase">
         Initialisation du système...
       </div>
     );
@@ -59,7 +94,8 @@ export function HeroSlider() {
 
   return (
     <section 
-      className="relative w-full bg-[#050505] overflow-hidden flex items-center justify-center min-h-[100dvh] h-[100dvh]"
+      className="relative w-full bg-[#050505] overflow-hidden flex items-center justify-center"
+      style={{ minHeight: fixedHeight, height: fixedHeight }}
     >
       <div className="absolute inset-0 z-0">
         <AnimatePresence initial={false} custom={direction}>
