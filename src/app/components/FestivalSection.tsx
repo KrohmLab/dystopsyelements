@@ -83,23 +83,26 @@ function ScenePanel({
   const step = 1 / total;
   const start = index * step;
   const end = start + step;
-  const fadeIn = start + step * 0.15;
-  const fadeOut = end - step * 0.15;
+  const fadeIn = start + step * 0.25;
+  const fadeOut = end - step * 0.25;
+
+  const isFirst = index === 0;
+  const isLast = index === total - 1;
 
   const opacity = useTransform(
     progress,
     [start, fadeIn, fadeOut, end],
-    [0, 1, 1, 0]
+    [isFirst ? 1 : 0, 1, 1, isLast ? 1 : 0]
   );
   const y = useTransform(
     progress,
     [start, fadeIn, fadeOut, end],
-    [40, 0, 0, -40]
+    [isFirst ? 0 : 40, 0, 0, isLast ? 0 : -40]
   );
   const skew = useTransform(
     progress,
     [start, fadeIn, fadeOut, end],
-    [6, 0, 0, -6]
+    [isFirst ? 0 : 6, 0, 0, isLast ? 0 : -6]
   );
 
   const Icon = scene.icon;
