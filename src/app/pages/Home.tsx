@@ -15,7 +15,7 @@ export function Home() {
   });
 
   return (
-    <div className="relative bg-[#020202] text-white min-h-screen overflow-x-hidden">
+    <div className="relative bg-[#020202] text-white min-h-screen">
       {/* Scroll Progress Bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#75feed] to-[#fc029b] transform origin-left z-[100] pointer-events-none"
