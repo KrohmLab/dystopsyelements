@@ -4,20 +4,35 @@ import { router } from './routes';
 
 export default function App() {
   useEffect(() => {
-    // 1. Fonction pour calculer la hauteur réelle sans la barre d'adresse mobile
+    let lastWidth = window.innerWidth;
+    
+    // 1. Fonction pour calculer la hauteur réelle
     const setVh = () => {
-      // On prend 1% de la hauteur de la fenêtre
-      const vh = window.innerHeight * 0.01;
-      // On l'injecte dans la racine du document (le <html>)
-      document.documentElement.style.setProperty('--vh', `${vh}px`);
+      const currentWidth = window.innerWidth;
+      const isMobile = currentWidth <= 768;
+      
+      // Sur mobile, on met à jour SEULEMENT si la largeur change (rotation)
+      // Cela évite que la hauteur change quand la barre d'adresse disparaît au scroll
+      if (!isMobile || currentWidth !== lastWidth) {
+        const vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+        lastWidth = currentWidth;
+      }
     };
 
     // 2. Exécution immédiate au montage
-    setVh();
+    const initialVh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${initialVh}px`);
 
-    // 3. Mise à jour uniquement lors d'un vrai redimensionnement (ex: rotation du téléphone)
-    // On évite de le faire au scroll pour ne pas recréer le "saut"
+    // 3. Mise à jour raisonnée
     window.addEventListener('resize', setVh);
+    window.addEventListener('orientationchange', () => {
+      setTimeout(() => {
+        const vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+        lastWidth = window.innerWidth;
+      }, 100);
+    });
 
     return () => window.removeEventListener('resize', setVh);
   }, []);

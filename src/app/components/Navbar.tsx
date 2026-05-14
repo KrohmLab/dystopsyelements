@@ -45,8 +45,8 @@ export function Navbar() {
     { name: 'Nexen Festival 2026', to: '/' },
     { name: 'Agenda', to: '/events' },
     { name: 'Prestations', to: '/' },
-    { name: 'Shop', to: '/' },
-    { name: 'Contact', to: '/' }
+    { name: 'Shop', to: '/shop' },
+    { name: 'Contact', to: '/contact' }
   ];
 
   return (
@@ -120,8 +120,8 @@ export function Navbar() {
             <NavLink to="/" dataText="Nexen Festival 2026">Nexen Festival 2026</NavLink>
             <NavLink to="/events" dataText="Agenda">Agenda</NavLink>
             <NavLink to="/" dataText="Prestations">Prestations</NavLink>
-            <NavLink to="/" dataText="Shop">Shop</NavLink>
-            <NavLink to="/" dataText="Contact">Contact</NavLink>
+            <NavLink to="/shop" dataText="Shop">Shop</NavLink>
+            <NavLink to="/contact" dataText="Contact">Contact</NavLink>
             
             <div className="ml-8 pl-8 border-l border-gray-800">
               <Link 

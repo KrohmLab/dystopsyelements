@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 
-const IS_CURSOR_ENABLED = true;
+const IS_CURSOR_ENABLED = false;
 
 export function CustomCursor() {
   const [position, setPosition] = useState({ x: 0, y: 0 });

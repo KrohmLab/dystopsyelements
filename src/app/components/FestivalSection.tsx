@@ -105,9 +105,9 @@ export function FestivalSection() {
     <section
       ref={containerRef}
       className="relative bg-[#020202]"
-      style={{ height: `calc(100vh + ${TOTAL * 65}vh)` }}
+      style={{ height: `calc((var(--vh, 1vh) * 100) + ${TOTAL * 65}vh)` }}
     >
-      <div className="sticky top-0 h-screen w-full overflow-hidden">
+      <div className="sticky top-0 h-[calc(var(--vh,1vh)*100)] w-full overflow-hidden">
         {/* Background image with parallax */}
         <motion.div
           style={{ scale: bgScale, y: bgY, filter: "grayscale(0.6) saturate(1.2) contrast(1.1)" }}

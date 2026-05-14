@@ -190,7 +190,7 @@ export function Events() {
               >
                 <Link
                   to={`/events/${event.id}`}
-                  className="relative block mb-6 w-full shrink-0 aspect-[4/3] bg-[#050505]"
+                  className="relative block mb-6 w-full shrink-0 aspect-square bg-[#050505]"
                 >
                   <div
                     className={`absolute -inset-3 border-2 ${activeTab === "upcoming" ? "border-[#75feed]/20 group-hover:border-[#75feed]/50" : "border-[#fc029b]/20 group-hover:border-[#fc029b]/50"} bg-transparent transition-colors duration-500`}
@@ -265,7 +265,7 @@ export function Events() {
                     className="block w-fit"
                   >
                     <h3
-                      className={`font-orbitron text-2xl font-black mb-3 uppercase tracking-tight transition-colors ${activeTab === "upcoming" ? "text-white group-hover:text-[#75feed]" : "text-gray-300 group-hover:text-white"}`}
+                      className={`font-orbitron text-2xl font-black mb-3 uppercase tracking-tight transition-colors line-clamp-1 w-full ${activeTab === "upcoming" ? "text-white group-hover:text-[#75feed]" : "text-gray-300 group-hover:text-white"}`}
                     >
                       {event.title}
                     </h3>
