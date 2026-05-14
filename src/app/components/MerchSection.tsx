@@ -32,7 +32,9 @@ export function MerchSection() {
         breakpoint: 640,
         settings: {
           slidesToShow: 1,
-          slidesToScroll: 1
+          slidesToScroll: 1,
+          centerMode: true,
+          centerPadding: "12%",
         }
       }
     ]
